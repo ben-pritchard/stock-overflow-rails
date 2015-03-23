@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
     self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
   end
 
+  def send_welcome_message
+    CustomerMailer.deliver_welcome_message(self)
+  end
+
   def is_email?
     self.email.include?('@') && self.email.include?('.')
   end
