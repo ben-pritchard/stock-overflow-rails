@@ -3,8 +3,8 @@
   <% if @user.questions.any? %>
   <% @user.questions.each  do |question|  %>
   <div class="col-md-2">
-    <%= link_to question.title, user_question_path(@user, question) %>
-    <%= link_to "Delete", user_question_path(@user, question),
+    <%= link_to question.title, question_path(@user, question) %>
+    <%= link_to "Delete", question_path(@user, question),
     :data => {:confirm => "Do you really want to delete this masterpiece?",
       :method => "delete"} %>
     </div>
@@ -12,5 +12,13 @@
     <% else %>
     <h1>No questions yet</h1>
     <% end %>
+
+    <h2>Feed</h2>
+    <% @questions.each do |question| %>
+    <ul>
+    <li><%= link_to question.title, question_path(question) %> </li>
+    </ul>
+    <% end %>
+
   </div>
-  <%= link_to 'Add A Question', new_user_question_path(@user) %>
+  <%= link_to 'Add A Question', new_question_path %>

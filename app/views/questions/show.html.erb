@@ -1,1 +1,10 @@
 <h1> <%= @question.title %> </h1>
+
+<h3>The question is:</h3>
+<p>
+  <%= @question.body %>
+</p>
+
+<%= render 'answer' %>
+
+<%= link_to "Back", :back, :class => "btn btn-primary" %>

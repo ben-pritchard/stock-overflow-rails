@@ -1,0 +1,6 @@
+<h4>Answer it:</h4>
+
+<%= form_for Answer.new do |f| %>
+  <%= f.text_area :body, :placeholder => 'Your answer here', :rows => '6' %>
+  <%= f.submit "Submit the winning answer", :class => "btn btn-success" %>
+<% end %>

@@ -1,42 +1,38 @@
 class QuestionsController < ApplicationController
-    def create
-    @user = User.find(params[:user_id])
-    @question = @user.questions.new(question_params)
-    if @question.save
-      flash[:notice] = "Question added!"
-      redirect_to user_path(@user)
-    else
-      render :new
-    end
+
+  def index
+    @questions = Question.all
   end
 
   def show
-    @questions = Question.find(params[:user_id])
+    @question = Question.find(params[:id])
   end
 
   def new
-    @user = User.find(params[:user_id])
     @question = Question.new
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @question = @user.questions.new(question_params)
+    @question = current_user.questions.new(question_params)
     if @question.save
       flash[:notice] = "Question added successfully!"
-      redirect_to user_path(@user)
+      redirect_to questions_path
     else
       render :new
     end
-
   end
 
-  def index
-    @user = User.find(params[:user_id])
+    def update
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      flash[:notice] = "Question successfully edited!"
+      redirect_to questions_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @user = User.find(params[:user_id])
     @question = Question.find(params[:id])
     if @question.destroy
       flash[:alert] = "Question successfully deleted!"
@@ -46,6 +42,6 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :user_id)
   end
 end
