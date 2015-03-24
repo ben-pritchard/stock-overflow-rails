@@ -7,4 +7,11 @@ class CustomerMailer < ApplicationMailer
 
     mail to: user.email
   end
+
+  def send_user_answer_notification(user)
+    @user = user
+    @greeting = "Someone answered your question!"
+
+    mail to: user.email
+  end
 end
