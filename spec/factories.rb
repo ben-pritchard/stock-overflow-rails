@@ -4,4 +4,8 @@ FactoryGirl.define do
     password('password123')
     password_confirmation('password123')
   end
+  factory(:session) do
+    email('bob@bob.com')
+    password('password123')
+  end
 end

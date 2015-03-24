@@ -3,8 +3,8 @@ require "rails_helper"
 describe "the add a question process" do
   it "adds a new question" do
     user = FactoryGirl.create(:user)
-    visit user_path(user)
-    click_on "Add A Question"
+    session = FactoryGirl.create(:session)
+    visit new_question_path
     fill_in "Title", with: 'test title'
     fill_in "Body", with: 'bs'
     click_on "Create Question"
