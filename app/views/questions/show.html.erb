@@ -12,7 +12,7 @@
   <% @question.answers.each do |answer| %>
     <dl>
       <dt><%= answer.body %> VOTES: <%= answer.votes %></dt>
-      <dd><%= link_to "upvote", question_answer_path(@question, answer) {:method => "patch"}, :class => "btn btn-xs"%></dd>
+      <dd><%= link_to "upvote", question_answer_path(@question, answer), :data => {:method => "patch"}, :class => "btn btn-xs"%></dd>
     </dl>
   <% end %>
 <% end %>

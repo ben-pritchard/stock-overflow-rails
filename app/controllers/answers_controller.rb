@@ -17,8 +17,11 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     @answer.upvote
-    @answer.update
-    redirect_to question_path(@question)
+    if @answer.save
+      redirect_to question_path(@question)
+    else
+      redirect_to :back
+    end
   end
 
 private
