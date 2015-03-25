@@ -13,9 +13,17 @@ class AnswersController < ApplicationController
     end
   end
 
+  def update
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.find(params[:id])
+    @answer.upvote
+    @answer.update
+    redirect_to question_path(@question)
+  end
+
 private
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, :votes)
   end
 
 end

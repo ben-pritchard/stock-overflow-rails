@@ -8,10 +8,12 @@
 <%= render 'answers/answer' %>
 
 <% if @question.answers.any? %>
+  <% @question.answers.order(votes: :desc) %>
   <% @question.answers.each do |answer| %>
-    <ul>
-      <li><%= answer.body %></li>
-    </ul>
+    <dl>
+      <dt><%= answer.body %> VOTES: <%= answer.votes %></dt>
+      <dd><%= link_to "upvote", question_answer_path(@question, answer) {:method => "patch"}, :class => "btn btn-xs"%></dd>
+    </dl>
   <% end %>
 <% end %>
 
